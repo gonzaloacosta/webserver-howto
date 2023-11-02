@@ -1,0 +1,19 @@
+version: '3'
+services:
+  http-echo:
+    image: mendhak/http-https-echo
+    ports:
+      - 18080:8080
+
+  apache:
+    build: ./apache
+    ports:
+      - "9443:8443"
+      - "9080:8080"
+    depends_on:
+      - http-echo
+
+  api:
+    build: ./api
+    ports:
+      - "6000:6000"
